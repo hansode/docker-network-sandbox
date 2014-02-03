@@ -6,5 +6,16 @@
 set -e
 set -x
 
-#sudo docker pull hansode/centos-6.5-x86_64
-sudo docker pull dhrp/sshd
+##
+
+function pull_image() {
+  local image_name=${1:-base}
+
+  sudo docker images ${image_name} | egrep -w ^${image_name} || {
+    sudo docker pull ${image_name}
+  }
+}
+
+##
+
+pull_image dhrp/sshd

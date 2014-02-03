@@ -10,8 +10,9 @@ function yum() {
   $(type -P yum) --disablerepo=updates "${@}"
 }
 
-addpkgs=""
+addpkgs="
+"
 
-if [[ -n "${addpkgs}" ]]; then
+if [[ -n "$(echo ${addpkgs})" ]]; then
   yum install -y ${addpkgs}
 fi

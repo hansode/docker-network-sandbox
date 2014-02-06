@@ -14,27 +14,43 @@ sleep 5
 
 ps -ef | grep [/]usr/bin/docker
 
+suffix=${RANDOM}
+
 ## ct0x
 
-sudo docker run -d -name ct01 dhrp/sshd /usr/sbin/sshd -D
-sudo docker ps
-sudo iptables -t filter -nL
+{
+  sudo docker run -d -name ct01_${suffix} dhrp/sshd /usr/sbin/sshd -D
+  sudo docker ps
+  sudo iptables -t filter -nL
+} | tee /vagrant/ct01.txt
 
 ## ct1x
 
-sudo docker run -d -name ct11 -link ct01:sshd dhrp/sshd /usr/sbin/sshd -D
-sudo docker run -d -name ct12 -link ct11:sshd dhrp/sshd /usr/sbin/sshd -D
+{
+  sudo docker run -d -name ct11_${suffix} -link ct01_${suffix}:sshd dhrp/sshd /usr/sbin/sshd -D
+  sudo docker ps
+  sudo iptables -t filter -nL
+} | tee /vagrant/ct11.txt
 
-sudo docker ps
-sudo iptables -t filter -nL
+{
+  sudo docker run -d -name ct12_${suffix} -link ct11_${suffix}:sshd dhrp/sshd /usr/sbin/sshd -D
+  sudo docker ps
+  sudo iptables -t filter -nL
+} | tee /vagrant/ct12.txt
 
 ## ct2x
 
-sudo docker run -d -name ct21 -link ct01:sshd dhrp/sshd /usr/sbin/sshd -D
-sudo docker run -d -name ct22 -link ct21:sshd dhrp/sshd /usr/sbin/sshd -D
+{
+  sudo docker run -d -name ct21_${suffix} -link ct01_${suffix}:sshd dhrp/sshd /usr/sbin/sshd -D
+  sudo docker ps
+  sudo iptables -t filter -nL
+} | tee /vagrant/ct21.txt
 
-sudo docker ps
-sudo iptables -t filter -nL
+{
+  sudo docker run -d -name ct22_${suffix} -link ct21_${suffix}:sshd dhrp/sshd /usr/sbin/sshd -D
+  sudo docker ps
+  sudo iptables -t filter -nL
+} | tee /vagrant/ct22.txt
 
 # teardown
 sudo docker kill $(sudo docker ps -q)

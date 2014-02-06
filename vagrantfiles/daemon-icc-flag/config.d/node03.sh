@@ -18,10 +18,18 @@ suffix=${RANDOM}
 
 ##
 
+yes | ssh-keygen -N "" -t dsa -C sample -f sample
+chown vagrant:vagrant sample
+
 cat <<'_EOS_' > Dockerfile
 FROM dhrp/sshd
 
 RUN echo root:root | chpasswd
+RUN mkdir -m 700 /root/.ssh
+ADD sample       /root/sample
+ADD sample.pub   /root/.ssh/authorized_keys
+RUN chmod 700    /root/sample
+RUN chmod 644    /root/.ssh/authorized_keys
 _EOS_
 
 sudo docker build -t sshd .

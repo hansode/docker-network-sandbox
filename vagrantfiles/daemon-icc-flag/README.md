@@ -19,3 +19,30 @@ via [DOCKER 0.6.5: NAME YOUR CONTAINERS, LINK THEM TOGETHER, SELECTIVELY PUBLISH
 $ make node01 node02
 $ diff -r shared.d/node0{1,2}
 ```
+
+### Result
+
+```
+$ diff -r log.d/node0{1,2}
+```
+
+```
+diff -r log.d/node01/iptables.filter.1.log log.d/node02/iptables.filter.1.log
+6c6
+< ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0
+---
+> DROP       all  --  0.0.0.0/0            0.0.0.0/0
+9c9
+< ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0
+---
+> DROP       all  --  0.0.0.0/0            0.0.0.0/0
+diff -r log.d/node01/iptables.filter.2.log log.d/node02/iptables.filter.2.log
+6c6
+< ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0
+---
+> DROP       all  --  0.0.0.0/0            0.0.0.0/0
+9c9
+< ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0
+---
+> DROP       all  --  0.0.0.0/0            0.0.0.0/0
+```

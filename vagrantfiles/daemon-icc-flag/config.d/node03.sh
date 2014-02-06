@@ -16,6 +16,12 @@ ps -ef | grep [/]usr/bin/docker
 
 suffix=${RANDOM}
 
+#
+# ct01 -+-> ct11 -> ct21
+#       |
+#       +-> ct12 -> ct22
+#
+
 ## ct0x
 
 {

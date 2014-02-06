@@ -22,7 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # -icc=false
   config.vm.define "node02" do |node|
-    node.vm.hostname = "node01"
+    node.vm.hostname = "node02"
     node.vm.provision "shell", path: "config.d/#{node.vm.hostname}.sh"
   end
 end

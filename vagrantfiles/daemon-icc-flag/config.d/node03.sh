@@ -22,7 +22,7 @@ suffix=${RANDOM}
   sudo docker run -d -name ct01_${suffix} dhrp/sshd /usr/sbin/sshd -D
   sudo docker ps
   sudo iptables -t filter -nL
-} | tee /vagrant/ct01.txt
+} | tee /vagrant/ct01_${suffix}.txt
 
 ## ct1x
 
@@ -30,13 +30,13 @@ suffix=${RANDOM}
   sudo docker run -d -name ct11_${suffix} -link ct01_${suffix}:sshd dhrp/sshd /usr/sbin/sshd -D
   sudo docker ps
   sudo iptables -t filter -nL
-} | tee /vagrant/ct11.txt
+} | tee /vagrant/ct11_${suffix}.txt
 
 {
   sudo docker run -d -name ct12_${suffix} -link ct11_${suffix}:sshd dhrp/sshd /usr/sbin/sshd -D
   sudo docker ps
   sudo iptables -t filter -nL
-} | tee /vagrant/ct12.txt
+} | tee /vagrant/ct12_${suffix}.txt
 
 ## ct2x
 
@@ -44,13 +44,14 @@ suffix=${RANDOM}
   sudo docker run -d -name ct21_${suffix} -link ct01_${suffix}:sshd dhrp/sshd /usr/sbin/sshd -D
   sudo docker ps
   sudo iptables -t filter -nL
-} | tee /vagrant/ct21.txt
+} | tee /vagrant/ct21_${suffix}.txt
 
 {
   sudo docker run -d -name ct22_${suffix} -link ct21_${suffix}:sshd dhrp/sshd /usr/sbin/sshd -D
   sudo docker ps
   sudo iptables -t filter -nL
-} | tee /vagrant/ct22.txt
+} | tee /vagrant/ct22_${suffix}.txt
 
 # teardown
+
 sudo docker kill $(sudo docker ps -q)

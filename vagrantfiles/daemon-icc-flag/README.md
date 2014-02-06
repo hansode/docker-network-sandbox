@@ -12,3 +12,10 @@ via [DOCKER 0.6.5: NAME YOUR CONTAINERS, LINK THEM TOGETHER, SELECTIVELY PUBLISH
 
 + node01: `-icc=true`
 + node02: `-icc=false`
+
+### Usage
+
+```
+$ make node01 node02
+$ diff -r shared.d/node0{1,2}
+```

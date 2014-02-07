@@ -76,6 +76,13 @@ sudo docker build -t sshd .
   sudo iptables -t filter -nL
 } | tee /vagrant/ct22_${suffix}.txt
 
+##
+
+while read uuid line; do
+  set ${line}; shift 9
+  echo ${uuid} $(sudo docker inspect -format="{{.NetworkSettings.IPAddress}}" ${uuid}) ${@}
+done < <(sudo docker ps | sed 1d)
+
 # teardown
 
 #sudo docker kill $(sudo docker ps -q)

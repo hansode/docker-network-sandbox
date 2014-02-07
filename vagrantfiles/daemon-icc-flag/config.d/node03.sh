@@ -51,13 +51,13 @@ sudo docker build -t sshd .
 ## ct1x
 
 {
-  sudo docker run -d -name ct11_${suffix} -link ct01_${suffix}:sshd sshd /usr/sbin/sshd -D
+  sudo docker run -p 22 -d -name ct11_${suffix} -link ct01_${suffix}:sshd sshd /usr/sbin/sshd -D
   sudo docker ps
   sudo iptables -t filter -nL
 } | tee /vagrant/ct11_${suffix}.txt
 
 {
-  sudo docker run -d -name ct12_${suffix} -link ct01_${suffix}:sshd sshd /usr/sbin/sshd -D
+  sudo docker run -p 22 -d -name ct12_${suffix} -link ct01_${suffix}:sshd sshd /usr/sbin/sshd -D
   sudo docker ps
   sudo iptables -t filter -nL
 } | tee /vagrant/ct12_${suffix}.txt
@@ -65,13 +65,13 @@ sudo docker build -t sshd .
 ## ct2x
 
 {
-  sudo docker run -d -name ct21_${suffix} -link ct11_${suffix}:sshd sshd /usr/sbin/sshd -D
+  sudo docker run -p 22 -d -name ct21_${suffix} -link ct11_${suffix}:sshd sshd /usr/sbin/sshd -D
   sudo docker ps
   sudo iptables -t filter -nL
 } | tee /vagrant/ct21_${suffix}.txt
 
 {
-  sudo docker run -d -name ct22_${suffix} -link ct12_${suffix}:sshd sshd /usr/sbin/sshd -D
+  sudo docker run -p 22 -d -name ct22_${suffix} -link ct12_${suffix}:sshd sshd /usr/sbin/sshd -D
   sudo docker ps
   sudo iptables -t filter -nL
 } | tee /vagrant/ct22_${suffix}.txt

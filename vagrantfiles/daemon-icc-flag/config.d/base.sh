@@ -22,10 +22,22 @@ pull_image dhrp/sshd
 
 ##
 
-sudo mkdir -p /etc/sysctl.d
-cat <<_EOS_ | sudo tee /etc/sysctl.d/30-bridge-if.conf
-net.bridge.bridge-nf-call-iptables = 1
-net.bridge.bridge-nf-call-arptables = 1
-_EOS_
+while read line; do
+  set ${line}
+
+  # /etc/sysctl.conf
+  egrep ^$1 /etc/sysctl.conf -q || {
+    echo "$1 = $3" | sudo tee -a /etc/sysctl.conf
+  } && {
+    sudo sed -i "s,^$1.*,$1 = $3," /etc/sysctl.conf
+  }
+
+  # verify
+  egrep ^$1 /etc/sysctl.conf
+done < <(cat <<-_EOS_
+	net.bridge.bridge-nf-call-iptables = 1
+	net.bridge.bridge-nf-call-arptables = 1
+	_EOS_
+	)
 
 sudo sysctl -p

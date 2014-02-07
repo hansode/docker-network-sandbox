@@ -53,7 +53,6 @@ diff -r log.d/node01/iptables.filter.2.log log.d/node02/iptables.filter.2.log
    + `other_args="-icc=false"`
 + /etc/sysctl.conf
    + `net.bridge.bridge-nf-call-iptables = 1`
-   + `net.bridge.bridge-nf-call-arptables = 1`
 
 ```
 sudo docker run -p 22 -d -name ct01                 sshd /usr/sbin/sshd -D

@@ -36,7 +36,6 @@ while read line; do
   egrep ^$1 /etc/sysctl.conf
 done < <(cat <<-_EOS_
 	net.bridge.bridge-nf-call-iptables = 1
-	net.bridge.bridge-nf-call-arptables = 1
 	_EOS_
 	)
 

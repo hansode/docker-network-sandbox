@@ -19,3 +19,13 @@ function pull_image() {
 ##
 
 pull_image dhrp/sshd
+
+##
+
+sudo mkdir -p /etc/sysctl.d
+cat <<_EOS_ | sudo tee /etc/sysctl.d/30-bridge-if.conf
+net.bridge.bridge-nf-call-iptables = 1
+net.bridge.bridge-nf-call-arptables = 1
+_EOS_
+
+sudo sysctl -p

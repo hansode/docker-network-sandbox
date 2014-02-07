@@ -56,10 +56,10 @@ diff -r log.d/node01/iptables.filter.2.log log.d/node02/iptables.filter.2.log
 
 ```
 sudo docker run -p 22 -d -name ct01                 sshd /usr/sbin/sshd -D
-sudo docker run -p 22 -d -name ct11 -link ct01:sshd sshd /usr/sbin/sshd -D
-sudo docker run -p 22 -d -name ct12 -link ct01:sshd sshd /usr/sbin/sshd -D
-sudo docker run -p 22 -d -name ct21 -link ct11:sshd sshd /usr/sbin/sshd -D
-sudo docker run -p 22 -d -name ct22 -link ct12:sshd sshd /usr/sbin/sshd -D
+sudo docker run       -d -name ct11 -link ct01:sshd sshd /usr/sbin/sshd -D
+sudo docker run       -d -name ct12 -link ct01:sshd sshd /usr/sbin/sshd -D
+sudo docker run       -d -name ct21 -link ct11:sshd sshd /usr/sbin/sshd -D
+sudo docker run       -d -name ct22 -link ct12:sshd sshd /usr/sbin/sshd -D
 ```
 
 ```

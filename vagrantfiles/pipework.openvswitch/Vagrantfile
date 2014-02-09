@@ -26,6 +26,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     node.vm.hostname = "node02"
     node.vm.provision "shell", path: "config.d/#{node.vm.hostname}.sh"
     node.vm.synced_folder "shared.d/#{node.vm.hostname}", "/vagrant"
+    # node02:192.168.10.21 <-[gre]-> node03:192.168.10.31
+    node.vm.network "private_network", ip: "192.168.10.21"
   end
 
   # -icc=true (default) / ovs: gre-tunnel
@@ -33,5 +35,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     node.vm.hostname = "node03"
     node.vm.provision "shell", path: "config.d/#{node.vm.hostname}.sh"
     node.vm.synced_folder "shared.d/#{node.vm.hostname}", "/vagrant"
+    # node02:192.168.10.21 <-[gre]-> node03:192.168.10.31
+    node.vm.network "private_network", ip: "192.168.10.31"
   end
 end

@@ -41,4 +41,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     node.vm.provision "shell", path: "config.d/#{node.vm.hostname}.sh"
     node.vm.synced_folder "shared.d/#{node.vm.hostname}", "/vagrant"
   end
+
+  # -icc=false, duplicated -name <name>
+  config.vm.define "node05" do |node|
+    node.vm.hostname = "node05"
+    node.vm.provision "shell", path: "config.d/#{node.vm.hostname}.sh"
+    node.vm.synced_folder "shared.d/#{node.vm.hostname}", "/vagrant"
+  end
 end

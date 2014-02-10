@@ -15,3 +15,7 @@ node03:
 node04:
 	mkdir -p shared.d/$@
 	vagrant up $@
+
+node05:
+	mkdir -p shared.d/$@
+	vagrant up $@

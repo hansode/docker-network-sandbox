@@ -27,4 +27,5 @@ sudo iptables -t filter -nL | tee /vagrant/iptables.filter.2.log
 sudo iptables -t nat    -nL | tee /vagrant/iptables.nat.2.log
 
 # teardown
+
 sudo docker kill $(sudo docker ps -q)

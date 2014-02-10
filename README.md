@@ -9,3 +9,9 @@
 + iproute-2.6.32-130.el6ost.netns.2.x86_64
 + bridge-utils-1.2-10.el6.x86_64
 + openvswitch-1.11.0_8ce28d-1.el6ost.x86_64
+
+## Host Environment
+
++ Windows 8.1
++ Vagrant 1.4.3
++ VirtualBox 4.3.6 r91406

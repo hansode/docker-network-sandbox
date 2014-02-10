@@ -35,9 +35,9 @@ _EOS_
 sudo docker build -t sshd .
 
 #
-# ct01 -+-> ct11 -> ct21
-#       |
-#       +-> ct12 -> ct22
+# ct01 -+-> ct11 -+-> ct21
+#       |         |
+#       +-> ct12 -+-> ct22
 #
 
 ## ct0x
@@ -65,13 +65,13 @@ sudo docker build -t sshd .
 ## ct2x
 
 {
-  sudo docker run -d -name ct21_${suffix} -link ct11_${suffix}:sshd sshd /usr/sbin/sshd -D
+  sudo docker run -d -name ct21_${suffix} -link ct11_${suffix}:sshd -link ct12_${suffix}:sshd sshd /usr/sbin/sshd -D
   sudo docker ps
   sudo iptables -t filter -nL
 } | tee /vagrant/ct21_${suffix}.txt
 
 {
-  sudo docker run -d -name ct22_${suffix} -link ct12_${suffix}:sshd sshd /usr/sbin/sshd -D
+  sudo docker run -d -name ct22_${suffix} -link ct12_${suffix}:sshd -link ct11_${suffix}:sshd sshd /usr/sbin/sshd -D
   sudo docker ps
   sudo iptables -t filter -nL
 } | tee /vagrant/ct22_${suffix}.txt

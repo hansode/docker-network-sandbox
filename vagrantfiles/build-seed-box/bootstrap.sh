@@ -1,1 +1,0 @@
-../daemon-icc-flag/bootstrap.sh

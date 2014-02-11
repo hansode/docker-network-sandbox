@@ -40,6 +40,7 @@ sudo docker build -t sshd .
 {
   set +e
   sudo docker run -p 22 -d -name ct01_${suffix} sshd /usr/sbin/sshd -D
+  sudo docker kill $(sudo docker ps -q)
   sudo docker run -p 22 -d -name ct01_${suffix} sshd /usr/sbin/sshd -D
   set -e
   sudo docker ps

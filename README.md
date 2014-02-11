@@ -2,7 +2,7 @@
 
 ## System Requirements
 
-+ CentOS 6.5
++ CentOS 6.5 x86_64
 + kernel-2.6.32-431.el6.x86_64
 + docker-io-0.7.6-2.el6.x86_64
 + lxc-0.9.0-2.el6.x86_64

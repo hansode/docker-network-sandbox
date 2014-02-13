@@ -34,17 +34,17 @@ _EOS_
 
 sudo docker build -t sshd .
 
-## ct1x
+## ct1
 
+sudo docker run -d -p 22 sshd /usr/sbin/sshd -D
+sudo iptables -t filter -nL | tee /vagrant/iptables.filter.1.log
+sudo iptables -t nat    -nL | tee /vagrant/iptables.nat.1.log
 
-{
-  set +e
-  sudo docker run -p 22 -d -name ct01_${suffix} sshd /usr/sbin/sshd -D
-  sudo docker kill $(sudo docker ps -q)
-  sudo docker run -p 22 -d -name ct01_${suffix} sshd /usr/sbin/sshd -D
-  set -e
-  sudo docker ps
-}
+## ct2
+
+sudo docker run -d -p 22 sshd /usr/sbin/sshd -D
+sudo iptables -t filter -nL | tee /vagrant/iptables.filter.2.log
+sudo iptables -t nat    -nL | tee /vagrant/iptables.nat.2.log
 
 # teardown
 
